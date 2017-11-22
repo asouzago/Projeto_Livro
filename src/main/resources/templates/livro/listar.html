@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Listar Livro</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-sm-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>A quanto tempo foi lançado</th>
+                <th>Diretor</th>
+                <th>Media Votos</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="livro : ${livros}">
+                <td th:text="*{livro.id}"></td>
+                <td th:text="*{livro.nome}"></td>
+                <td th:inline="text" th:if="${livro.ano}">[[2017 - ${livro.ano}]] anos ([[${livro.ano}]])</td>
+                <td th:inline="text" th:unless="${livro.ano}"> Irineu </td>
+                <td th:text="*{livro.editora.nome}"></td>
+                <td th:inline="text" th:if="*{livro.mediaAvaliacoes}" th:text="*{livro.mediaAvaliacoes}"></td>
+                <td th:inline="text" th:unless="${livro.mediaAvaliacoes}"> Irineu </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Ações">
+                        <a th:href="@{/livro/votar/{id}(id=${livro.id})}" class="btn btn-primary btn-sm">Votar</a>
+                        <a th:href="@{/livro/editar/{id}(id=${livro.id})}" class="btn btn-info btn-sm">Editar</a>
+                        <a th:href="@{/livro/delete/{id}(id=${livro.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table></div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${!livros.hasPrevious()}? 'disabled'">
+                    <a class="page-link" th:href="@{/livro(page=${livros.getNumber()-1},size=${livros.getSize()})}">Anterior</a>
+                </li>
+                <li class="page-item" th:classappend="${i == livros.getNumber()}? 'active'"
+                    th:each="i : ${#numbers.sequence( 0, livros.getTotalPages()-1)}">
+                    <a class="page-link"
+                       th:href="@{/livro(page=${i},size=${livros.getSize()})}"
+                       th:text="${i+1}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${!livros.hasNext()}? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{/livro(page=${livros.getNumber()+1},size=${livros.getSize()})}">Proxima</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row" style="padding-bottom:5px;">
+        <div class="col-sm-9">
+            <a th:href="@{/livro/novo}" class="btn btn-primary">Novo</a>
+        </div>
+        <div class="col-sm-2">
+            <a th:href="@{/livro/relatorio}" title="exportar par PDF" class="btn btn-success "><i class="fa fa-file-pdf-o fa-2x "></i></a>
+            <a th:href="@{/livro/relatorio(format=xlsx)}" title="exportar par Excel" class="btn btn-success "><i class="fa fa-file-excel-o fa-2x "></i></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

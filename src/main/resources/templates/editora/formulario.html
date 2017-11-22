@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Formulario Editora</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <form th:action="@{/editora/salvar}" th:object="${editora}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form-group">
+                    <label for="inputNome">Nome</label>
+                    <input type="text" class="form-control" id="inputNome" th:field="*{nome}"/>
+                    <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="badge badge-danger" >erro</span>
+                </div>
+                <a th:href="@{/editora}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

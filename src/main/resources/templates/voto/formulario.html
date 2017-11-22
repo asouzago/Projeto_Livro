@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Formulario Votação</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <form th:action="@{/voto/salvar}" th:object="${voto}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form-group">
+                    <label for="inputDiretor">Livro </label>
+                    <select class="form-control" id="inputDiretor" name="livro">
+                        <!--<option value="">Selecione o livro</option>-->
+                        <option th:each="livro : ${livros}" th:value="${livro.id}" th:text="${livro.nome}"></option>
+                    </select>
+                    <span  th:if="${#fields.hasErrors('livro')}" th:errors="*{livro}" class="badge badge-danger" >erro</span>
+                </div>
+                <div class="form-group">
+                    <input name="voto" class="kv-ltr-theme-fa-star rating-loading"  data-size="sm" th:field="*{estrela}"/>
+                    <span  th:if="${#fields.hasErrors('estrela')}" th:errors="*{estrela}" class="badge badge-danger" >erro</span>
+                </div>
+                <a th:href="@{/livro}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
