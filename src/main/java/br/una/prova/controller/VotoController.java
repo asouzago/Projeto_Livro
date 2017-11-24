@@ -25,7 +25,7 @@ public class VotoController {
     @GetMapping
     public String novo(Model model) {
         model.addAttribute("voto", new Voto());
-        model.addAttribute("filmes", livroRepository.findAll());
+        model.addAttribute("livros", livroRepository.findAll());
         return "voto/formulario";
     }
 
@@ -35,7 +35,7 @@ public class VotoController {
             return "voto/formulario";
         }
 
-        model.addAttribute("filmes", livroRepository.findAll());
+        model.addAttribute("livros", livroRepository.findAll());
         votoRepository.save(voto);
         return "redirect:/livro";
     }

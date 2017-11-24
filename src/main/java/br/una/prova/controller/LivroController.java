@@ -33,7 +33,7 @@ public class LivroController {
     }
 
     @GetMapping
-    public String list(Model model, @PageableDefault(size = 15) Pageable pageable) {
+    public String list(Model model, @PageableDefault(size = 5) Pageable pageable) {
         model.addAttribute("livros", livroRepository.findAll(pageable));
         return "livro/listar";
     }
@@ -88,5 +88,13 @@ public class LivroController {
         model.addAttribute("datasource", livroRepository.findAll());
         model.addAttribute("format", format);
         return "reports/livros";
+    }
+
+    @GetMapping("/buscar")
+    public String buscar(Model model, @RequestParam String texto) {
+
+        model.addAttribute("livros", livroRepository.findByNomeLike("%" + texto + "%"));
+
+        return "livro/listar";
     }
 }

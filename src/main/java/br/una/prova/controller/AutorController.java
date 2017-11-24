@@ -2,6 +2,8 @@ package br.una.prova.controller;
 
 import br.una.prova.entity.Autor;
 import br.una.prova.repository.AutorRepository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,8 +22,8 @@ public class AutorController {
     }
 
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("autores", autorRepository.findAll());
+    public String list(Model model, @PageableDefault(size = 5) Pageable pageable) {
+        model.addAttribute("autores", autorRepository.findAll(pageable));
         return "autor/listar";
     }
 
@@ -50,5 +52,13 @@ public class AutorController {
     public String delete(@PathVariable Integer id) {
         autorRepository.delete(id);
         return "redirect:/autor";
+    }
+
+    @GetMapping("/buscar")
+    public String buscar(Model model, @RequestParam String texto) {
+
+        model.addAttribute("autores", autorRepository.findByNomeLike("%" + texto + "%"));
+
+        return "autor/listar";
     }
 }

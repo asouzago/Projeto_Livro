@@ -9,6 +9,18 @@
 <div layout:fragment="content">
     <div class="row">
         <div class="col-sm-12">
+            <form th:action="@{/editora/buscar}" method="get">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <input type="text" name="texto" class="form-control"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-secondary">buscar</button>
+                    </div>
+                </div>
+                <br />
+            </form>
             <table class="table">
                 <thead>
                 <tr>
@@ -29,11 +41,29 @@
                     </td>
                 </tr>
                 </tbody>
-            </table></div>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${!editoras.hasPrevious()}? 'disabled'">
+                        <a class="page-link" th:href="@{/editora(page=${editoras.getNumber()-1},size=${editoras.getSize()})}">Anterior</a>
+                    </li>
+                    <li class="page-item" th:classappend="${i == editoras.getNumber()}? 'active'"
+                        th:each="i : ${#numbers.sequence( 0, editoras.getTotalPages()-1)}">
+                        <a class="page-link"
+                           th:href="@{/editora(page=${i},size=${editoras.getSize()})}"
+                           th:text="${i+1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${!editoras.hasNext()}? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/editora(page=${editoras.getNumber()+1},size=${editoras.getSize()})}">Proxima</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <a th:href="@{editora/novo}" class="btn btn-primary">Novo</a>
+            <a th:href="@{/editora/novo}" class="btn btn-primary">Novo</a>
         </div>
     </div>
 </div>

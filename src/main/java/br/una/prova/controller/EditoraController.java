@@ -3,6 +3,8 @@ package br.una.prova.controller;
 import br.una.prova.entity.Editora;
 import br.una.prova.repository.EditoraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +20,8 @@ public class EditoraController {
     EditoraRepository editoraRepository;
 
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("editoras", editoraRepository.findAll());
+    public String list(Model model, @PageableDefault(size = 5) Pageable pageable) {
+        model.addAttribute("editoras", editoraRepository.findAll(pageable));
         return "/editora/listar";
     }
 
@@ -50,5 +52,13 @@ public class EditoraController {
         editoraRepository.save(editora);
 
         return "redirect:/editora";
+    }
+
+    @GetMapping("/buscar")
+    public String buscar(Model model, @RequestParam String texto) {
+
+        model.addAttribute("editoras", editoraRepository.findByNomeLike("%" + texto + "%"));
+
+        return "editora/listar";
     }
 }
