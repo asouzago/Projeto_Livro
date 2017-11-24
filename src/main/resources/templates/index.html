@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/main">
 <head>
-    <title>Projeto filmes</title>
+    <title>Prova</title>
     <meta charset="UTF-8"/>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="row">
         <div class="col-sm-12">
-            IRINEU
+            <h1 th:inline="text">Olá [[${#httpServletRequest.remoteUser}]]!</h1>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" value="logout" class="btn btn-secondary">Logout</button>
+            </form>
         </div>
     </div>
 </div>

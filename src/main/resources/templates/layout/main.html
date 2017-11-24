@@ -13,7 +13,7 @@
 <body id="body">
 <!-- sticky-top e para qnd aquela parte do codigo chegar no topo ela nao subir mais, ficar ocupando aquele espaço -->
 <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" th:href="@{/}">Filmes</a>
+    <a class="navbar-brand" th:href="@{/}">Livros</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,14 +22,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ator') ? 'active':''}">
-                <a class="nav-link" th:href="@{/ator}">Ator </a>
+                <a class="nav-link" th:href="@{/livro}">Livro </a>
             </li>
             <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/diretor') ? 'active':''}">
-                <a class="nav-link" th:href="@{/diretor}">Diretor</a>
+                <a class="nav-link" th:href="@{/autor}">Autor</a>
             </li>
 
             <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/filme') ? 'active':''}">
-                <a class="nav-link" th:href="@{/filme}">Filme</a>
+                <a class="nav-link" th:href="@{/editora}">Editora</a>
             </li>
             <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/voto') ? 'active':''}">
                 <a class="nav-link" th:href="@{/voto}">Votação</a>

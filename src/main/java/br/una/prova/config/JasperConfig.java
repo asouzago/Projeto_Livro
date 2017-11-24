@@ -26,7 +26,7 @@ public class JasperConfig {
 class DinamicJasperReportsMultiFormatView extends JasperReportsMultiFormatView{
     public DinamicJasperReportsMultiFormatView() {
         Properties contentDispositionMappings = new Properties();
-        contentDispositionMappings.put("pdf","attachment; filename=relatorio.pdf");
+        contentDispositionMappings.put("pdf","inline; filename=relatorio.pdf");
         contentDispositionMappings.put("xlsx","attachment; filename=relatorio.xlsx");
         setContentDispositionMappings(contentDispositionMappings);
     }

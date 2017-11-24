@@ -9,7 +9,7 @@
 <div layout:fragment="content">
     <div class="row">
         <div class="col-sm-12">
-            <form th:action="@{/filme/salvar}" th:object="${filme}" method="post">
+            <form th:action="@{/livro/salvar}" th:object="${livro}" method="post">
                 <input type="hidden" th:field="*{id}" />
                 <div class="form-group">
                     <label for="inputNome">Nome</label>
@@ -21,13 +21,24 @@
                     <input type="text" class="form-control" id="inputAno" th:field="*{ano}"/>
                 </div>
                 <div class="form-group">
-                    <label for="inputDiretor">Diretor</label>
-                    <select class="form-control" id="inputDiretor" th:field="*{diretor}">
-                        <option value=""> Selecione o Diretor </option>
-                        <option th:each="diretor : ${diretores}" th:value="${diretor.id}" th:text="${diretor.nome}"></option>
+                    <label for="inputVolume">Volume</label>
+                    <input type="text" class="form-control" id="inputVolume" th:field="*{volume}"/>
+                </div>
+                <div class="form-group">
+                    <label for="inputEditora">Editora</label>
+                    <select class="form-control" id="inputEditora" th:field="*{editora}">
+                        <option value=""> Selecione a Editora</option>
+                        <option th:each="editora : ${editoras}" th:value="${editora.id}" th:text="${editora.nome}"></option>
                     </select>
                 </div>
-                <a th:href="@{/filme}" class="btn btn-secondary">Cancelar</a>
+                <div class="form-group">
+                    <label for="inputAutor">Autor</label>
+                    <select multiple="multiple" class="form-control" id="inputAutor" th:field="*{autor}">
+                        <option value=""> Selecione os Autores </option>
+                        <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nome}"></option>
+                    </select>
+                </div>
+                <a th:href="@{/livro}" class="btn btn-secondary">Cancelar</a>
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
         </div>

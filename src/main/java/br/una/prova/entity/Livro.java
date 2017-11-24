@@ -29,6 +29,17 @@ public class Livro {
     @JoinColumn(name = "autor_id", referencedColumnName = "id")
     private Autor autor;
 
+    @Formula("(select AVG(v.estrela + 0.0) from voto v where v.livro_id = id)")
+    private Double mediaAvaliacoes;
+
+    public Double getMediaAvaliacoes() {
+        return mediaAvaliacoes;
+    }
+
+    public void setMediaAvaliacoes(Double mediaAvaliacoes) {
+        this.mediaAvaliacoes = mediaAvaliacoes;
+    }
+
     public Integer getId() {
         return id;
     }

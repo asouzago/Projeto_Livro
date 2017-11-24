@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 align="center">Login</h2>
+
+            <div th:if="${param.error}">
+                Usuário e/ou senha inválido(s).
+            </div>
+            <div th:if="${param.logout}">
+                Você foi desconectado.
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <input name="username" class="form-control"/>
+                <input type="password" name="password" class="form-control"/>
+                <button type="submit" value="login" class="btn btn-secondary">Logar</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

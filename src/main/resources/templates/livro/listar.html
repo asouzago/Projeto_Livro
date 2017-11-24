@@ -15,9 +15,11 @@
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>A quanto tempo foi lançado</th>
-                <th>Diretor</th>
-                <th>Media Votos</th>
+                <th>Lançamento</th>
+                <th>Volume</th>
+                <th>Editora</th>
+                <th>Autor</th>
+                <th>Media avaliações</th>
                 <th>Ações</th>
             </tr>
             </thead>
@@ -25,11 +27,12 @@
             <tr th:each="livro : ${livros}">
                 <td th:text="*{livro.id}"></td>
                 <td th:text="*{livro.nome}"></td>
-                <td th:inline="text" th:if="${livro.ano}">[[2017 - ${livro.ano}]] anos ([[${livro.ano}]])</td>
-                <td th:inline="text" th:unless="${livro.ano}"> Irineu </td>
+                <td th:text="*{livro.ano}"></td>
+                <td th:text="*{livro.volume}"></td>
                 <td th:text="*{livro.editora.nome}"></td>
+                <td th:text="*{livro.autor.nome}"></td>
                 <td th:inline="text" th:if="*{livro.mediaAvaliacoes}" th:text="*{livro.mediaAvaliacoes}"></td>
-                <td th:inline="text" th:unless="${livro.mediaAvaliacoes}"> Irineu </td>
+                <td th:inline="text" th:unless="${livro.mediaAvaliacoes}"> N/A </td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Ações">
                         <a th:href="@{/livro/votar/{id}(id=${livro.id})}" class="btn btn-primary btn-sm">Votar</a>
